@@ -37,7 +37,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-echo $(hostname): Generating TPCDS-DB, scale = $SCALE, chunks=$CHUNKS, worker=$WORKER_ID
+echo $(hostname): Generating TPCDS-DB, scale = $SCALE, chunks = $CHUNKS, worker = $WORKER_ID
 
 cd ../tools
 
@@ -71,3 +71,9 @@ for table in ${tables[@]}; do
 done
 
 rm -f ../data/SF-$SCALE/*.dat
+
+end_time=$(date +%s.%3N)
+
+elapsed=$(echo "scale=3; $end_time - $start_time" | bc)
+
+echo $(hostname): worker=$WORKER_ID, elapsed_time = $elapsed
